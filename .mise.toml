@@ -1,6 +1,7 @@
 [tools]
 node = "20"
 "npm:@redocly/cli" = "1.25"
+java = "corretto-21"
 
 [tasks.oas-lint]
 description = "Redocly로 API 문서 서버 실행"

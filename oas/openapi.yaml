@@ -17,6 +17,15 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+  schemas:
+    Agent:
+      $ref: './schemas/Agent.yaml'
+    MCPConfig:
+      $ref: './schemas/MCPConfig.yaml'
+    Schedule:
+      $ref: './schemas/Schedule.yaml'
+    ChatMessage:
+      $ref: './schemas/ChatMessage.yaml'
 
 paths:
   /agents:
