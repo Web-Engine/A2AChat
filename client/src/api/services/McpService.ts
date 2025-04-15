@@ -2,115 +2,96 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-import type { MCPConfig } from '../models/MCPConfig';
+import type { CreateMcpDto } from '../models/CreateMcpDto';
+import type { Mcp } from '../models/Mcp';
 import type { CancelablePromise } from '../core/CancelablePromise';
 import { OpenAPI } from '../core/OpenAPI';
 import { request as __request } from '../core/request';
 export class McpService {
     /**
-     * MCP 목록 조회
-     * @returns MCPConfig MCP 목록
+     * 모든 Mcp 설정 조회
+     * @returns Mcp 성공
      * @throws ApiError
      */
-    public static listMcpConfigs(): CancelablePromise<Array<MCPConfig>> {
+    public static mcpsControllerFindAll(): CancelablePromise<Array<Mcp>> {
         return __request(OpenAPI, {
             method: 'GET',
             url: '/mcps',
-            errors: {
-                401: `인증되지 않은 요청`,
-                403: `권한 없음`,
-            },
         });
     }
     /**
-     * MCP 추가(설치)
+     * 새로운 Mcp 설정 생성
      * @param requestBody
-     * @returns MCPConfig 추가된 MCP 정보
+     * @returns Mcp 생성 성공
      * @throws ApiError
      */
-    public static createMcpConfig(
-        requestBody: MCPConfig,
-    ): CancelablePromise<MCPConfig> {
+    public static mcpsControllerCreate(
+        requestBody: CreateMcpDto,
+    ): CancelablePromise<Mcp> {
         return __request(OpenAPI, {
             method: 'POST',
             url: '/mcps',
             body: requestBody,
             mediaType: 'application/json',
-            errors: {
-                400: `잘못된 요청`,
-                401: `인증되지 않은 요청`,
-                403: `권한 없음`,
-            },
         });
     }
     /**
-     * MCP 상세 정보 조회
-     * @param mcpId
-     * @returns MCPConfig MCP 상세 정보
+     * 특정 Mcp 설정 조회
+     * @param id
+     * @returns Mcp 성공
      * @throws ApiError
      */
-    public static getMcpConfig(
-        mcpId: string,
-    ): CancelablePromise<MCPConfig> {
+    public static mcpsControllerFindOne(
+        id: string,
+    ): CancelablePromise<Mcp> {
         return __request(OpenAPI, {
             method: 'GET',
-            url: '/mcps/{mcpId}',
+            url: '/mcps/{id}',
             path: {
-                'mcpId': mcpId,
+                'id': id,
             },
             errors: {
-                401: `인증되지 않은 요청`,
-                403: `권한 없음`,
-                404: `MCP를 찾을 수 없음`,
+                404: `Mcp 설정이 존재하지 않음`,
             },
         });
     }
     /**
-     * MCP 정보 수정
-     * @param mcpId
-     * @param requestBody
-     * @returns MCPConfig 수정된 MCP 정보
+     * Mcp 설정 업데이트
+     * @param id
+     * @returns Mcp 업데이트 성공
      * @throws ApiError
      */
-    public static updateMcpConfig(
-        mcpId: string,
-        requestBody: MCPConfig,
-    ): CancelablePromise<MCPConfig> {
+    public static mcpsControllerUpdate(
+        id: string,
+    ): CancelablePromise<Mcp> {
         return __request(OpenAPI, {
             method: 'PUT',
-            url: '/mcps/{mcpId}',
+            url: '/mcps/{id}',
             path: {
-                'mcpId': mcpId,
+                'id': id,
             },
-            body: requestBody,
-            mediaType: 'application/json',
             errors: {
-                400: `잘못된 요청`,
-                401: `인증되지 않은 요청`,
-                403: `권한 없음`,
-                404: `MCP를 찾을 수 없음`,
+                404: `Mcp 설정이 존재하지 않음`,
             },
         });
     }
     /**
-     * MCP 삭제
-     * @param mcpId
+     * Mcp 설정 삭제
+     * @param id
      * @returns void
      * @throws ApiError
      */
-    public static deleteMcpConfig(
-        mcpId: string,
+    public static mcpsControllerRemove(
+        id: string,
     ): CancelablePromise<void> {
         return __request(OpenAPI, {
             method: 'DELETE',
-            url: '/mcps/{mcpId}',
+            url: '/mcps/{id}',
             path: {
-                'mcpId': mcpId,
+                'id': id,
             },
             errors: {
-                401: `인증되지 않은 요청`,
-                403: `권한 없음`,
-                404: `MCP를 찾을 수 없음`,
+                404: `Mcp 설정이 존재하지 않음`,
             },
         });
     }

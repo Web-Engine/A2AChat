@@ -2,11 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type Schedule = {
-    /**
-     * 예약 실행의 고유 식별자
-     */
-    id: string;
+export type CreateScheduleDto = {
     /**
      * 실행할 Agent의 ID
      */

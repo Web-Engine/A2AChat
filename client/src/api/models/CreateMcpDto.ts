@@ -2,7 +2,7 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-export type MCPConfig = {
+export type CreateMcpDto = {
     /**
      * MCP 서버의 URL
      */
