@@ -1,9 +1,4 @@
-# A2A Chat 프로젝트 설명서
-
-## 프로젝트 개요
-A2A Chat은  
-
-# A2A Chat Platform
+# A2A Chat
 
 ## 프로젝트 목표
 Google의 A2A (Agent-to-Agent) Protocol을 기반으로 구축된 멀티 에이전트 채팅 플랫폼입니다.
