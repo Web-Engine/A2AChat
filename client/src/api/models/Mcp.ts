@@ -4,16 +4,41 @@
 /* eslint-disable */
 export type Mcp = {
     /**
-     * MCP 서버의 URL
+     * MCP의 고유 UUID
      */
-    url: string;
+    id: string;
     /**
-     * MCP 서버 인증 토큰
+     * MCP 타입
      */
-    token: string;
+    type: Mcp.type;
     /**
-     * 추가 설정 옵션
+     * 실행할 명령어
      */
-    options?: Record<string, any>;
+    command: string;
+    /**
+     * 명령어 인자 목록
+     */
+    args: Array<string>;
+    /**
+     * 실행 환경 변수
+     */
+    env: Record<string, string>;
+    /**
+     * MCP 이름
+     */
+    name: string;
+    /**
+     * MCP 설명
+     */
+    description?: string;
 };
+export namespace Mcp {
+    /**
+     * MCP 타입
+     */
+    export enum type {
+        STDIO = 'stdio',
+        SSE = 'sse',
+    }
+}
 

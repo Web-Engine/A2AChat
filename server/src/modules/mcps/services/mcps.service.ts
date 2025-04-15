@@ -1,42 +1,36 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { Mcp } from '../entities/mcp.entity';
 import { CreateMcpDto } from '../dtos/create-mcp.dto';
 import { v4 as uuidv4 } from 'uuid';
+import { McpsRepository } from './mcps.repository';
 
 @Injectable()
 export class McpsService {
-  private configs: Map<string, Mcp> = new Map();
+  constructor(
+    private readonly repository: McpsRepository,
+  ) {}
 
-  findAll(): Mcp[] {
-    return Array.from(this.configs.values());
+  async findAll(): Promise<Mcp[]> {
+    return this.repository.findAll();
   }
 
-  findOne(id: string): Mcp | undefined {
-    return this.configs.get(id);
+  async findOne(id: string): Promise<Mcp | null> {
+    return this.repository.findById(id);
   }
 
-  create(createMcpDto: CreateMcpDto): Mcp {
-    const id = uuidv4();
-    const config: Mcp = {
+  async create(createMcpDto: CreateMcpDto): Promise<Mcp> {
+    const mcp: Mcp = {
+      id: uuidv4(),
       ...createMcpDto,
     };
-    this.configs.set(id, config);
-    return config;
+    return this.repository.create(mcp);
   }
 
-  update(id: string, updateMcpDto: Partial<CreateMcpDto>): Mcp | undefined {
-    const config = this.configs.get(id);
-    if (!config) return undefined;
-
-    const updatedConfig = {
-      ...config,
-      ...updateMcpDto,
-    };
-    this.configs.set(id, updatedConfig);
-    return updatedConfig;
+  async update(id: string, updateMcpDto: Partial<CreateMcpDto>): Promise<Mcp | null> {
+    return this.repository.update(id, updateMcpDto);
   }
 
-  remove(id: string): boolean {
-    return this.configs.delete(id);
+  async remove(id: string): Promise<boolean> {
+    return this.repository.remove(id);
   }
 } 

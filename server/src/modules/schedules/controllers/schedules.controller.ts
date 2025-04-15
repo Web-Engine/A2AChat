@@ -12,7 +12,7 @@ export class SchedulesController {
   @Get()
   @ApiOperation({ summary: '모든 예약 실행 조회' })
   @ApiResponse({ status: 200, description: '성공', type: [Schedule] })
-  findAll(): Schedule[] {
+  async findAll(): Promise<Schedule[]> {
     return this.schedulesService.findAll();
   }
 
@@ -20,21 +20,21 @@ export class SchedulesController {
   @ApiOperation({ summary: '특정 예약 실행 조회' })
   @ApiResponse({ status: 200, description: '성공', type: Schedule })
   @ApiResponse({ status: 404, description: '예약 실행이 존재하지 않음' })
-  findOne(@Param('id') id: string): Schedule | undefined {
+  async findOne(@Param('id') id: string): Promise<Schedule | null> {
     return this.schedulesService.findOne(id);
   }
 
   @Get('agent/:agentId')
   @ApiOperation({ summary: '특정 Agent의 모든 예약 실행 조회' })
   @ApiResponse({ status: 200, description: '성공', type: [Schedule] })
-  findByAgentId(@Param('agentId') agentId: string): Schedule[] {
+  async findByAgentId(@Param('agentId') agentId: string): Promise<Schedule[]> {
     return this.schedulesService.findByAgentId(agentId);
   }
 
   @Post()
   @ApiOperation({ summary: '새로운 예약 실행 생성' })
   @ApiResponse({ status: 201, description: '생성 성공', type: Schedule })
-  create(@Body() createScheduleDto: CreateScheduleDto): Schedule {
+  async create(@Body() createScheduleDto: CreateScheduleDto): Promise<Schedule> {
     return this.schedulesService.create(createScheduleDto);
   }
 
@@ -42,7 +42,7 @@ export class SchedulesController {
   @ApiOperation({ summary: '예약 실행 업데이트' })
   @ApiResponse({ status: 200, description: '업데이트 성공', type: Schedule })
   @ApiResponse({ status: 404, description: '예약 실행이 존재하지 않음' })
-  update(@Param('id') id: string, @Body() updateScheduleDto: Partial<CreateScheduleDto>): Schedule | undefined {
+  async update(@Param('id') id: string, @Body() updateScheduleDto: Partial<CreateScheduleDto>): Promise<Schedule | null> {
     return this.schedulesService.update(id, updateScheduleDto);
   }
 
@@ -51,7 +51,7 @@ export class SchedulesController {
   @ApiOperation({ summary: '예약 실행 삭제' })
   @ApiResponse({ status: 204, description: '삭제 성공' })
   @ApiResponse({ status: 404, description: '예약 실행이 존재하지 않음' })
-  remove(@Param('id') id: string): void {
-    this.schedulesService.remove(id);
+  async remove(@Param('id') id: string): Promise<void> {
+    await this.schedulesService.remove(id);
   }
 } 

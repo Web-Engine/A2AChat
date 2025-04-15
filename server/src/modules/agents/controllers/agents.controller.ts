@@ -12,7 +12,7 @@ export class AgentsController {
   @Get()
   @ApiOperation({ summary: '모든 Agent 조회' })
   @ApiResponse({ status: 200, description: '성공', type: [Agent] })
-  findAll(): Agent[] {
+  async findAll(): Promise<Agent[]> {
     return this.agentsService.findAll();
   }
 
@@ -20,14 +20,14 @@ export class AgentsController {
   @ApiOperation({ summary: '특정 Agent 조회' })
   @ApiResponse({ status: 200, description: '성공', type: Agent })
   @ApiResponse({ status: 404, description: 'Agent가 존재하지 않음' })
-  findOne(@Param('id') id: string): Agent | undefined {
+  async findOne(@Param('id') id: string): Promise<Agent | null> {
     return this.agentsService.findOne(id);
   }
 
   @Post()
   @ApiOperation({ summary: '새로운 Agent 생성' })
   @ApiResponse({ status: 201, description: '생성 성공', type: Agent })
-  create(@Body() createAgentDto: CreateAgentDto): Agent {
+  async create(@Body() createAgentDto: CreateAgentDto): Promise<Agent> {
     return this.agentsService.create(createAgentDto);
   }
 
@@ -35,7 +35,7 @@ export class AgentsController {
   @ApiOperation({ summary: 'Agent 정보 업데이트' })
   @ApiResponse({ status: 200, description: '업데이트 성공', type: Agent })
   @ApiResponse({ status: 404, description: 'Agent가 존재하지 않음' })
-  update(@Param('id') id: string, @Body() updateAgentDto: Partial<CreateAgentDto>): Agent | undefined {
+  async update(@Param('id') id: string, @Body() updateAgentDto: Partial<CreateAgentDto>): Promise<Agent | null> {
     return this.agentsService.update(id, updateAgentDto);
   }
 
@@ -44,7 +44,7 @@ export class AgentsController {
   @ApiOperation({ summary: 'Agent 삭제' })
   @ApiResponse({ status: 204, description: '삭제 성공' })
   @ApiResponse({ status: 404, description: 'Agent가 존재하지 않음' })
-  remove(@Param('id') id: string): void {
-    this.agentsService.remove(id);
+  async remove(@Param('id') id: string): Promise<void> {
+    await this.agentsService.remove(id);
   }
 } 

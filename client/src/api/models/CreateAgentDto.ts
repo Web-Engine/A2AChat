@@ -4,6 +4,10 @@
 /* eslint-disable */
 export type CreateAgentDto = {
     /**
+     * Agent 타입
+     */
+    type: CreateAgentDto.type;
+    /**
      * Agent의 이름
      */
     name: string;
@@ -12,4 +16,13 @@ export type CreateAgentDto = {
      */
     description?: string;
 };
+export namespace CreateAgentDto {
+    /**
+     * Agent 타입
+     */
+    export enum type {
+        LOCAL = 'Local',
+        REMOTE = 'Remote',
+    }
+}
 

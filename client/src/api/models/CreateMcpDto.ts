@@ -4,16 +4,37 @@
 /* eslint-disable */
 export type CreateMcpDto = {
     /**
-     * MCP 서버의 URL
+     * MCP 타입
      */
-    url: string;
+    type: CreateMcpDto.type;
     /**
-     * MCP 서버 인증 토큰
+     * 실행할 명령어
      */
-    token: string;
+    command: string;
     /**
-     * 추가 설정 옵션
+     * 명령어 인자 목록
      */
-    options?: Record<string, any>;
+    args: Array<string>;
+    /**
+     * 실행 환경 변수
+     */
+    env: Record<string, string>;
+    /**
+     * MCP 이름
+     */
+    name: string;
+    /**
+     * MCP 설명
+     */
+    description?: string;
 };
+export namespace CreateMcpDto {
+    /**
+     * MCP 타입
+     */
+    export enum type {
+        STDIO = 'stdio',
+        SSE = 'sse',
+    }
+}
 

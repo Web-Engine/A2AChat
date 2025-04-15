@@ -1,20 +1,6 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/": {
-      "get": {
-        "operationId": "AppController_getHello",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        },
-        "tags": [
-          "App"
-        ]
-      }
-    },
     "/agents": {
       "get": {
         "operationId": "AgentsController_findAll",
@@ -678,6 +664,15 @@
             "description": "Agent의 고유 식별자",
             "format": "uuid"
           },
+          "type": {
+            "type": "string",
+            "description": "Agent 타입",
+            "enum": [
+              "Local",
+              "Remote"
+            ],
+            "example": "Local"
+          },
           "name": {
             "type": "string",
             "description": "Agent의 이름"
@@ -689,12 +684,22 @@
         },
         "required": [
           "id",
+          "type",
           "name"
         ]
       },
       "CreateAgentDto": {
         "type": "object",
         "properties": {
+          "type": {
+            "type": "string",
+            "description": "Agent 타입",
+            "enum": [
+              "Local",
+              "Remote"
+            ],
+            "example": "Local"
+          },
           "name": {
             "type": "string",
             "description": "Agent의 이름"
@@ -705,53 +710,133 @@
           }
         },
         "required": [
+          "type",
           "name"
         ]
       },
       "Mcp": {
         "type": "object",
         "properties": {
-          "url": {
+          "id": {
             "type": "string",
-            "description": "MCP 서버의 URL",
-            "format": "uri"
+            "description": "MCP의 고유 UUID",
+            "example": "550e8400-e29b-41d4-a716-446655440000",
+            "format": "uuid"
           },
-          "token": {
+          "type": {
             "type": "string",
-            "description": "MCP 서버 인증 토큰"
+            "description": "MCP 타입",
+            "enum": [
+              "stdio",
+              "sse"
+            ],
+            "example": "stdio"
           },
-          "options": {
+          "command": {
+            "type": "string",
+            "description": "실행할 명령어",
+            "example": "/usr/bin/python3"
+          },
+          "args": {
+            "description": "명령어 인자 목록",
+            "example": [
+              "main.py",
+              "--port",
+              "8080"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "env": {
             "type": "object",
-            "description": "추가 설정 옵션",
-            "additionalProperties": true
+            "description": "실행 환경 변수",
+            "example": {
+              "ENV": "production",
+              "DEBUG": "false"
+            },
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "MCP 이름",
+            "example": "My MCP"
+          },
+          "description": {
+            "type": "string",
+            "description": "MCP 설명",
+            "example": "이 MCP는 ..."
           }
         },
         "required": [
-          "url",
-          "token"
+          "id",
+          "type",
+          "command",
+          "args",
+          "env",
+          "name"
         ]
       },
       "CreateMcpDto": {
         "type": "object",
         "properties": {
-          "url": {
+          "type": {
             "type": "string",
-            "description": "MCP 서버의 URL",
-            "format": "uri"
+            "description": "MCP 타입",
+            "enum": [
+              "stdio",
+              "sse"
+            ],
+            "example": "stdio"
           },
-          "token": {
+          "command": {
             "type": "string",
-            "description": "MCP 서버 인증 토큰"
+            "description": "실행할 명령어",
+            "example": "/usr/bin/python3"
           },
-          "options": {
+          "args": {
+            "description": "명령어 인자 목록",
+            "example": [
+              "main.py",
+              "--port",
+              "8080"
+            ],
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "env": {
             "type": "object",
-            "description": "추가 설정 옵션",
-            "additionalProperties": true
+            "description": "실행 환경 변수",
+            "example": {
+              "ENV": "production",
+              "DEBUG": "false"
+            },
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "MCP 이름",
+            "example": "My MCP"
+          },
+          "description": {
+            "type": "string",
+            "description": "MCP 설명",
+            "example": "이 MCP는 ..."
           }
         },
         "required": [
-          "url",
-          "token"
+          "type",
+          "command",
+          "args",
+          "env",
+          "name"
         ]
       },
       "Schedule": {

@@ -1,26 +1,54 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsUrl, IsOptional, IsObject } from 'class-validator';
+import { IsString, IsEnum, IsArray, IsObject, IsOptional } from 'class-validator';
+import { McpType } from '../entities/mcp.entity';
 
 export class CreateMcpDto {
   @ApiProperty({
-    description: 'MCP 서버의 URL',
-    format: 'uri',
+    description: 'MCP 타입',
+    enum: McpType,
+    example: McpType.STDIO,
   })
-  @IsUrl()
-  url: string;
+  @IsEnum(McpType)
+  type: McpType;
 
   @ApiProperty({
-    description: 'MCP 서버 인증 토큰',
+    description: '실행할 명령어',
+    example: '/usr/bin/python3',
   })
   @IsString()
-  token: string;
+  command: string;
 
   @ApiProperty({
-    description: '추가 설정 옵션',
-    required: false,
-    additionalProperties: true,
+    description: '명령어 인자 목록',
+    example: ['main.py', '--port', '8080'],
+    type: [String],
+  })
+  @IsArray()
+  @IsString({ each: true })
+  args: string[];
+
+  @ApiProperty({
+    description: '실행 환경 변수',
+    example: { "ENV": "production", "DEBUG": "false" },
+    type: 'object',
+    additionalProperties: { type: 'string' },
   })
   @IsObject()
+  env: Record<string, string>;
+
+  @ApiProperty({
+    description: 'MCP 이름',
+    example: 'My MCP',
+  })
+  @IsString()
+  name: string;
+
+  @ApiProperty({
+    description: 'MCP 설명',
+    example: '이 MCP는 ...',
+    required: false,
+  })
+  @IsString()
   @IsOptional()
-  options?: Record<string, any>;
+  description?: string;
 } 

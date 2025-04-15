@@ -2,49 +2,40 @@ import { Injectable } from '@nestjs/common';
 import { Schedule } from '../entities/schedule.entity';
 import { CreateScheduleDto } from '../dtos/create-schedule.dto';
 import { v4 as uuidv4 } from 'uuid';
+import { SchedulesRepository } from './schedules.repository';
 
 @Injectable()
 export class SchedulesService {
-  private schedules: Map<string, Schedule> = new Map();
+  constructor(
+    private readonly repository: SchedulesRepository,
+  ) {}
 
-  findAll(): Schedule[] {
-    return Array.from(this.schedules.values());
+  async findAll(): Promise<Schedule[]> {
+    return this.repository.findAll();
   }
 
-  findOne(id: string): Schedule | undefined {
-    return this.schedules.get(id);
+  async findOne(id: string): Promise<Schedule | null> {
+    return this.repository.findById(id);
   }
 
-  create(createScheduleDto: CreateScheduleDto): Schedule {
-    const id = uuidv4();
+  async create(createScheduleDto: CreateScheduleDto): Promise<Schedule> {
     const schedule: Schedule = {
-      id,
-      enabled: true,
+      id: uuidv4(),
+      enabled: createScheduleDto.enabled ?? true,
       ...createScheduleDto,
     };
-    this.schedules.set(id, schedule);
-    return schedule;
+    return this.repository.create(schedule);
   }
 
-  update(id: string, updateScheduleDto: Partial<CreateScheduleDto>): Schedule | undefined {
-    const schedule = this.schedules.get(id);
-    if (!schedule) return undefined;
-
-    const updatedSchedule = {
-      ...schedule,
-      ...updateScheduleDto,
-    };
-    this.schedules.set(id, updatedSchedule);
-    return updatedSchedule;
+  async update(id: string, updateScheduleDto: Partial<CreateScheduleDto>): Promise<Schedule | null> {
+    return this.repository.update(id, updateScheduleDto);
   }
 
-  remove(id: string): boolean {
-    return this.schedules.delete(id);
+  async remove(id: string): Promise<boolean> {
+    return this.repository.remove(id);
   }
 
-  findByAgentId(agentId: string): Schedule[] {
-    return Array.from(this.schedules.values()).filter(
-      schedule => schedule.agentId === agentId,
-    );
+  async findByAgentId(agentId: string): Promise<Schedule[]> {
+    return this.repository.findByAgentId(agentId);
   }
 } 

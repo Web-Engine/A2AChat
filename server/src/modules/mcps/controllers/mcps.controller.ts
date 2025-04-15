@@ -12,7 +12,7 @@ export class McpsController {
   @Get()
   @ApiOperation({ summary: '모든 Mcp 설정 조회' })
   @ApiResponse({ status: 200, description: '성공', type: [Mcp] })
-  findAll(): Mcp[] {
+  async findAll(): Promise<Mcp[]> {
     return this.mcpsService.findAll();
   }
 
@@ -20,14 +20,14 @@ export class McpsController {
   @ApiOperation({ summary: '특정 Mcp 설정 조회' })
   @ApiResponse({ status: 200, description: '성공', type: Mcp })
   @ApiResponse({ status: 404, description: 'Mcp 설정이 존재하지 않음' })
-  findOne(@Param('id') id: string): Mcp | undefined {
+  async findOne(@Param('id') id: string): Promise<Mcp | null> {
     return this.mcpsService.findOne(id);
   }
 
   @Post()
   @ApiOperation({ summary: '새로운 Mcp 설정 생성' })
   @ApiResponse({ status: 201, description: '생성 성공', type: Mcp })
-  create(@Body() createMcpDto: CreateMcpDto): Mcp {
+  async create(@Body() createMcpDto: CreateMcpDto): Promise<Mcp> {
     return this.mcpsService.create(createMcpDto);
   }
 
@@ -35,7 +35,7 @@ export class McpsController {
   @ApiOperation({ summary: 'Mcp 설정 업데이트' })
   @ApiResponse({ status: 200, description: '업데이트 성공', type: Mcp })
   @ApiResponse({ status: 404, description: 'Mcp 설정이 존재하지 않음' })
-  update(@Param('id') id: string, @Body() updateMcpDto: Partial<CreateMcpDto>): Mcp | undefined {
+  async update(@Param('id') id: string, @Body() updateMcpDto: Partial<CreateMcpDto>): Promise<Mcp | null> {
     return this.mcpsService.update(id, updateMcpDto);
   }
 
@@ -44,7 +44,7 @@ export class McpsController {
   @ApiOperation({ summary: 'Mcp 설정 삭제' })
   @ApiResponse({ status: 204, description: '삭제 성공' })
   @ApiResponse({ status: 404, description: 'Mcp 설정이 존재하지 않음' })
-  remove(@Param('id') id: string): void {
-    this.mcpsService.remove(id);
+  async remove(@Param('id') id: string): Promise<void> {
+    await this.mcpsService.remove(id);
   }
 } 

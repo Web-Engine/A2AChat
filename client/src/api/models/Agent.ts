@@ -8,6 +8,10 @@ export type Agent = {
      */
     id: string;
     /**
+     * Agent 타입
+     */
+    type: Agent.type;
+    /**
      * Agent의 이름
      */
     name: string;
@@ -16,4 +20,13 @@ export type Agent = {
      */
     description?: string;
 };
+export namespace Agent {
+    /**
+     * Agent 타입
+     */
+    export enum type {
+        LOCAL = 'Local',
+        REMOTE = 'Remote',
+    }
+}
 
