@@ -1,0 +1,7 @@
+[tools]
+node = "20"
+"npm:@redocly/cli" = "1.25"
+
+[tasks.oas-lint]
+description = "Redocly로 API 문서 서버 실행"
+run = "redocly lint oas/openapi.yaml"

@@ -1,0 +1,16 @@
+type: object
+required:
+  - url
+  - token
+properties:
+  url:
+    type: string
+    format: uri
+    description: MCP 서버의 URL
+  token:
+    type: string
+    description: MCP 서버 인증 토큰
+  options:
+    type: object
+    description: 추가 설정 옵션
+    additionalProperties: true 
