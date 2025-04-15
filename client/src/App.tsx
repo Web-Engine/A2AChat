@@ -1,35 +1,56 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import MainLayout from '@/components/layout/MainLayout';
+import './index.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+// Lazy loading for pages
+const ChatPage = lazy(() => import('./pages/chat/ChatPage'));
+const AgentListPage = lazy(() => import('./pages/agent/AgentListPage'));
+const AgentCreatePage = lazy(() => import('./pages/agent/AgentCreatePage'));
+const AgentDetailPage = lazy(() => import('./pages/agent/AgentDetailPage'));
+const AgentEditPage = lazy(() => import('./pages/agent/AgentEditPage'));
+const ScheduleListPage = lazy(() => import('./pages/schedule/ScheduleListPage'));
+const ScheduleCreatePage = lazy(() => import('./pages/schedule/ScheduleCreatePage'));
+const ScheduleDetailPage = lazy(() => import('./pages/schedule/ScheduleDetailPage'));
+const ScheduleEditPage = lazy(() => import('./pages/schedule/ScheduleEditPage'));
+const MCPServerPage = lazy(() => import('./pages/mcp/MCPServerPage'));
+const MCPServerDetailPage = lazy(() => import('./pages/mcp/MCPServerDetailPage'));
+const MCPInstallPage = lazy(() => import('./pages/mcp/MCPInstallPage'));
 
+const App: React.FC = () => {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <Router>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<MainLayout />}>
+            <Route index element={<ChatPage />} />
+            <Route path="chat" element={<ChatPage />} />
+            <Route path="chat/:roomId" element={<ChatPage />} />
+            
+            <Route path="agents">
+              <Route index element={<AgentListPage />} />
+              <Route path="new" element={<AgentCreatePage />} />
+              <Route path=":id" element={<AgentDetailPage />} />
+              <Route path=":id/edit" element={<AgentEditPage />} />
+            </Route>
+            
+            <Route path="schedules">
+              <Route index element={<ScheduleListPage />} />
+              <Route path="new" element={<ScheduleCreatePage />} />
+              <Route path=":id" element={<ScheduleDetailPage />} />
+              <Route path=":id/edit" element={<ScheduleEditPage />} />
+            </Route>
+            
+            <Route path="mcp">
+              <Route index element={<MCPServerPage />} />
+              <Route path="install" element={<MCPInstallPage />} />
+              <Route path=":serverId" element={<MCPServerDetailPage />} />
+            </Route>
+          </Route>
+        </Routes>
+      </Suspense>
+    </Router>
+  );
+};
 
-export default App
+export default App; 
