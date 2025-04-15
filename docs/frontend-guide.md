@@ -10,16 +10,15 @@
 ## 프로젝트 구조
 ```
 client/
-├── src/
-│   ├── components/     # 컴포넌트
-│   │   ├── common/     # 공통 컴포넌트
-│   │   └── ...         # 페이지별 컴포넌트
-│   ├── pages/          # 페이지 컴포넌트
-│   ├── hooks/          # 커스텀 훅
-│   ├── interfaces/     # 타입 정의
-│   └── utils/          # 유틸리티 함수
-├── public/             # 정적 파일
-└── ...                 # 설정 파일
+├── src/               # 소스 코드
+│   ├── components/    # 컴포넌트
+│   ├── pages/         # 페이지
+│   ├── models/        # 데이터 모델
+│   ├── hooks/         # 커스텀 훅
+│   ├── assets/        # 정적 자원
+│   ├── App.tsx        # 메인 앱 컴포넌트
+│   └── main.tsx       # 앱 진입점
+└── public/            # 정적 파일
 ```
 
 ## 공통 컴포넌트 가이드
@@ -31,4 +30,4 @@ client/
 - ESLint와 Prettier 규칙 준수
 - 함수형 컴포넌트 사용
 - TypeScript 타입 명시
-- 커밋 메시지는 Conventional Commits 규칙 준수 
+- 커밋 메시지는 Conventional Commits 규칙 준수
