@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AgentForm } from '@/components/agent/AgentForm';
-import { Agent } from '../../interfaces/agent';
+import { Agent } from '../../models/agent';
 
 const AgentCreatePage: React.FC = () => {
   const navigate = useNavigate();

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AgentDetail } from '@/components/agent/AgentDetail';
-import { Agent } from '../../interfaces/agent';
+import { Agent } from '../../models/agent';
 
 const AgentDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -35,6 +35,10 @@ const AgentDetailPage: React.FC = () => {
       // TODO: API를 통한 에이전트 삭제 로직 구현
       navigate('/agents');
     }
+  };
+
+  const handleManageRelationships = () => {
+    navigate(`/agents/relationship/create?sourceAgentId=${id}`);
   };
 
   if (isLoading) {
@@ -81,6 +85,7 @@ const AgentDetailPage: React.FC = () => {
           agent={agent}
           onEdit={handleEdit}
           onDelete={handleDelete}
+          onManageRelationships={handleManageRelationships}
         />
       </div>
     </div>

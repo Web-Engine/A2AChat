@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Agent } from '../../interfaces/agent';
+import { Agent } from '../../models/agent';
 import { Input } from '../common/Input';
 import { Textarea } from '../common/Textarea';
 import { Button } from '../common/Button';

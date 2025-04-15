@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ScheduleList } from '@/components/schedule/ScheduleList';
-import { Schedule } from '../../interfaces/schedule';
+import { Schedule } from '../../models/schedule';
 import { Button } from '@/components/common/Button';
 import { Card } from '@/components/common/Card';
 

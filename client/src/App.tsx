@@ -9,6 +9,9 @@ const AgentListPage = lazy(() => import('./pages/agent/AgentListPage'));
 const AgentCreatePage = lazy(() => import('./pages/agent/AgentCreatePage'));
 const AgentDetailPage = lazy(() => import('./pages/agent/AgentDetailPage'));
 const AgentEditPage = lazy(() => import('./pages/agent/AgentEditPage'));
+const AgentRelationshipListPage = lazy(() => import('./pages/agent/relationship/AgentRelationshipListPage'));
+const AgentRelationshipCreatePage = lazy(() => import('./pages/agent/relationship/AgentRelationshipCreatePage'));
+const AgentRelationshipEditPage = lazy(() => import('./pages/agent/relationship/AgentRelationshipEditPage'));
 const ScheduleListPage = lazy(() => import('./pages/schedule/ScheduleListPage'));
 const ScheduleCreatePage = lazy(() => import('./pages/schedule/ScheduleCreatePage'));
 const ScheduleDetailPage = lazy(() => import('./pages/schedule/ScheduleDetailPage'));
@@ -32,6 +35,11 @@ const App: React.FC = () => {
               <Route path="new" element={<AgentCreatePage />} />
               <Route path=":id" element={<AgentDetailPage />} />
               <Route path=":id/edit" element={<AgentEditPage />} />
+              <Route path="relationship">
+                <Route index element={<AgentRelationshipListPage />} />
+                <Route path="create" element={<AgentRelationshipCreatePage />} />
+                <Route path=":id/edit" element={<AgentRelationshipEditPage />} />
+              </Route>
             </Route>
             
             <Route path="schedules">

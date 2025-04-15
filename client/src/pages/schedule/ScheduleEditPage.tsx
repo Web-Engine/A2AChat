@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ScheduleForm } from '@/components/schedule/ScheduleForm';
-import { Schedule } from '../../interfaces/schedule';
+import { Schedule } from '../../models/schedule';
 
 const ScheduleEditPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

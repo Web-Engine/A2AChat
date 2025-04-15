@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Schedule } from '../../interfaces/schedule';
+import { Schedule } from '../../models/schedule';
 import { Button } from '../common/Button';
 
 interface ScheduleListProps {

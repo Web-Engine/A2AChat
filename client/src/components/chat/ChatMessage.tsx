@@ -1,5 +1,5 @@
 import React from 'react';
-import { Message } from '../../interfaces/websocket';
+import { Message } from '../../models/websocket';
 
 interface ChatMessageProps {
   message: Message;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Agent } from '../../interfaces/agent';
+import { Agent } from '../../models/agent';
 import { Card } from '../common/Card';
 import { Button } from '../common/Button';
 
@@ -7,12 +7,14 @@ interface AgentDetailProps {
   agent: Agent;
   onEdit: () => void;
   onDelete: () => void;
+  onManageRelationships: () => void;
 }
 
 export const AgentDetail: React.FC<AgentDetailProps> = ({
   agent,
   onEdit,
   onDelete,
+  onManageRelationships,
 }) => {
   const getStatusColor = (status: Agent['status']) => {
     switch (status) {
@@ -42,6 +44,9 @@ export const AgentDetail: React.FC<AgentDetailProps> = ({
             </div>
           </div>
           <div className="flex space-x-2">
+            <Button onClick={onManageRelationships} variant="secondary">
+              관계 관리
+            </Button>
             <Button onClick={onEdit} variant="primary">
               수정
             </Button>

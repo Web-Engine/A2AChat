@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ScheduleForm } from '@/components/schedule/ScheduleForm';
-import { Schedule } from '../../interfaces/schedule';
+import { Schedule } from '../../models/schedule';
 
 const ScheduleCreatePage: React.FC = () => {
   const navigate = useNavigate();

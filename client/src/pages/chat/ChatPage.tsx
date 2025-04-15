@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { ChatScreen } from '@/components/chat/ChatScreen';
 import { useWebSocket } from '../../hooks/useWebSocket';
-import { Message } from '../../interfaces/websocket';
+import { Message } from '../../models/websocket';
 
 const ChatPage: React.FC = () => {
   const { roomId } = useParams<{ roomId?: string }>();

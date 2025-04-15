@@ -1,5 +1,5 @@
 import React from 'react';
-import { Schedule, ScheduleExecution } from '../../interfaces/schedule';
+import { Schedule, ScheduleExecution } from '../../models/schedule';
 import { Card } from '@/components/common/Card';
 import { Button } from '@/components/common/Button';
 

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import { Message } from '../../interfaces/websocket';
+import { Message } from '../../models/websocket';
 import { ChatMessage } from './ChatMessage';
 import { ChatInput } from './ChatInput';
 

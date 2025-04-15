@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Schedule } from '../../interfaces/schedule';
+import { Schedule } from '../../models/schedule';
 import { Card } from '../common/Card';
 import { Button } from '../common/Button';
 import { Input } from '../common/Input';

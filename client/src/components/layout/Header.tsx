@@ -14,8 +14,8 @@ const Header: React.FC = () => {
   return (
     <header className="bg-white shadow">
       <div className="px-4 py-3">
-        <div className="flex justify-between items-center">
-          <h1 className="text-xl font-bold text-gray-800">A2A Chat</h1>
+        <div className="flex">
+          <h1 className="w-64 text-xl font-bold text-gray-800">A2A Chat</h1>
           <nav className="flex space-x-4">
             {menuItems.map((item) => (
               <Link
@@ -31,9 +31,6 @@ const Header: React.FC = () => {
               </Link>
             ))}
           </nav>
-          <div className="flex items-center space-x-4">
-            <span className="text-sm text-gray-600">관리자</span>
-          </div>
         </div>
       </div>
     </header>

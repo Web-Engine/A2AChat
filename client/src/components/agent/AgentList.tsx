@@ -1,5 +1,6 @@
 import React from 'react';
-import { Agent } from '../../interfaces/agent';
+import { Agent } from '../../models/agent';
+import { useNavigate } from 'react-router-dom';
 
 interface AgentListProps {
   agents: Agent[];
@@ -10,6 +11,8 @@ export const AgentList: React.FC<AgentListProps> = ({
   agents,
   onSelectAgent,
 }) => {
+  const navigate = useNavigate();
+
   const getStatusColor = (status: Agent['status']) => {
     switch (status) {
       case 'active':
@@ -21,6 +24,11 @@ export const AgentList: React.FC<AgentListProps> = ({
       default:
         return 'bg-gray-100 text-gray-800';
     }
+  };
+
+  const handleManageRelationships = (e: React.MouseEvent, agentId: string) => {
+    e.stopPropagation();
+    navigate(`/agents/relationship?sourceAgentId=${agentId}`);
   };
 
   return (
@@ -46,6 +54,12 @@ export const AgentList: React.FC<AgentListProps> = ({
               </div>
             </div>
             <div className="flex items-center space-x-2">
+              <button
+                onClick={(e) => handleManageRelationships(e, agent.id)}
+                className="text-blue-600 hover:text-blue-800 text-sm"
+              >
+                관계 관리
+              </button>
               <span className={`px-2 py-1 rounded ${getStatusColor(agent.status)}`}>
                 {agent.status}
               </span>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AgentForm } from '@/components/agent/AgentForm';
-import { Agent } from '../../interfaces/agent';
+import { Agent } from '../../models/agent';
 
 const AgentEditPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();

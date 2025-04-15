@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { MCPServer, MCPServerLog, MCPServerVersion } from '../../interfaces/mcp';
+import { MCPServer, MCPServerLog, MCPServerVersion } from '../../models/mcp';
 import { Button } from '@/components/common/Button';
 import { Card } from '@/components/common/Card';
 import { Table } from '@/components/common/Table';

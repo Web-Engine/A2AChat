@@ -3,7 +3,7 @@ import { io, Socket } from 'socket.io-client';
 import {
   Message,
   ChatRoom,
-} from '../interfaces/websocket';
+} from '../models/websocket';
 
 const SOCKET_URL = 'http://localhost:3000'; // 서버 URL
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AgentList } from '@/components/agent/AgentList';
-import { Agent } from '../../interfaces/agent';
+import { Agent } from '../../models/agent';
 import { Button } from '@/components/common/Button';
 import { Card } from '@/components/common/Card';
 
