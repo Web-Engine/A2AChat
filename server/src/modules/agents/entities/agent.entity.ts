@@ -7,7 +7,7 @@ export enum AgentType {
 
 export class Agent {
   @ApiProperty({
-    description: 'Agent의 고유 식별자',
+    description: 'Agent ID',
     format: 'uuid',
   })
   id: string;
@@ -15,17 +15,16 @@ export class Agent {
   @ApiProperty({
     description: 'Agent 타입',
     enum: AgentType,
-    example: AgentType.LOCAL,
   })
   type: AgentType;
 
   @ApiProperty({
-    description: 'Agent의 이름',
+    description: 'Agent 이름',
   })
   name: string;
 
   @ApiProperty({
-    description: 'Agent에 대한 설명',
+    description: 'Agent 설명',
     required: false,
   })
   description?: string;

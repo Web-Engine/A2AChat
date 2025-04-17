@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
-import { ScheduleModule } from '@nestjs/schedule';
+import { MongooseModule } from '@nestjs/mongoose';
 import { SchedulesController } from './controllers/schedules.controller';
 import { SchedulesService } from './services/schedules.service';
-import { SchedulesRepository } from './services/schedules.repository';
+import { SchedulesRepository } from './repositories/schedules.repository';
+import { ScheduleSchemaClass, ScheduleSchema } from './repositories/schemas/schedule.schema';
 
 @Module({
   imports: [
-    ScheduleModule.forRoot(),
+    MongooseModule.forFeature([{ name: ScheduleSchemaClass.name, schema: ScheduleSchema }]),
   ],
   controllers: [SchedulesController],
   providers: [SchedulesService, SchedulesRepository],
+  exports: [SchedulesService],
 })
 export class SchedulesModule {} 

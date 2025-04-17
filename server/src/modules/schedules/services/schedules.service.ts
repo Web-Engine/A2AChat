@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Schedule } from '../entities/schedule.entity';
 import { CreateScheduleDto } from '../dtos/create-schedule.dto';
 import { v4 as uuidv4 } from 'uuid';
-import { SchedulesRepository } from './schedules.repository';
+import { SchedulesRepository } from '../repositories/schedules.repository';
 
 @Injectable()
 export class SchedulesService {

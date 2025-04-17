@@ -25,4 +25,20 @@ export class CreateAgentDto {
   @IsString()
   @IsOptional()
   description?: string;
+
+  @ApiProperty({
+    description: 'Remote Agent 엔드포인트',
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  endpoint?: string;
+
+  @ApiProperty({
+    description: 'Remote Agent API 키',
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  apiKey?: string;
 } 
