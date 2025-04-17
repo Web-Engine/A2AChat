@@ -2,14 +2,15 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Task } from '../entities/task.entity';
-import { TaskSchemaClass } from './schemas/task.schema';
+import { TaskSchemaClass, TaskSchema } from './schemas/task.schema';
 
 @Injectable()
 export class TaskRepository {
-  constructor(
-    @InjectModel(TaskSchemaClass.name)
-    private readonly model: Model<Task>,
-  ) {}
+  private readonly model: Model<Task>;
+
+  constructor(@InjectModel(TaskSchemaClass.name) model: Model<Task>) {
+    this.model = model;
+  }
 
   async findAll(): Promise<Task[]> {
     return this.model.find().lean();

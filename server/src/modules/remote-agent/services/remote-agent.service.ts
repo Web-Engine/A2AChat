@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { RemoteAgentRepository } from '../repositories/remote-agent.repository';
-import { TasksService } from '../../tasks/services/tasks.service';
-import { Task, TaskStatus, Message } from '../../tasks/entities/task.entity';
+import { TaskService } from '../../task/services/task.service';
+import { Task, TaskStatus, Message } from '../../task/entities/task.entity';
 
 @Injectable()
 export class RemoteAgentService {
   constructor(
     private readonly remoteAgentRepository: RemoteAgentRepository,
-    private readonly tasksService: TasksService,
+    private readonly taskService: TaskService,
   ) {}
 
   // RemoteAgent 관련 메서드
@@ -29,22 +29,22 @@ export class RemoteAgentService {
 
   // Task 관련 메서드
   async createTask(agentId: string): Promise<Task> {
-    return this.tasksService.createTask(agentId);
+    return this.taskService.create(agentId);
   }
 
   async getTask(agentId: string, taskId: string): Promise<Task | null> {
-    return this.tasksService.getTask(agentId, taskId);
+    return this.taskService.findOne(taskId);
   }
 
   async getTasksByAgent(agentId: string): Promise<Task[]> {
-    return this.tasksService.getTasksByAgent(agentId);
+    return this.taskService.findByAgentId(agentId);
   }
 
   async addMessage(agentId: string, taskId: string, message: Message): Promise<Task | null> {
-    return this.tasksService.addMessage(agentId, taskId, message);
+    return this.taskService.addMessage(taskId, message);
   }
 
   async updateTaskStatus(agentId: string, taskId: string, status: TaskStatus): Promise<Task | null> {
-    return this.tasksService.updateTaskStatus(agentId, taskId, status);
+    return this.taskService.updateStatus(taskId, status);
   }
 } 

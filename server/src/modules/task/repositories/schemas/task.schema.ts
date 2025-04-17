@@ -1,27 +1,27 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { TaskStatus } from '../../entities/task.entity';
+import { Task, TaskStatus, Message } from '../../entities/task.entity';
 
-export type TaskDocument = TaskSchemaClass & Document;
+export type TaskDocument = Task & Document;
 
-@Schema({ timestamps: true })
+@Schema()
 export class TaskSchemaClass {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true })
   id: string;
 
   @Prop({ required: true })
   agentId: string;
 
-  @Prop({ required: true, enum: Object.values(TaskStatus), default: TaskStatus.SUBMITTED })
+  @Prop({ required: true, enum: TaskStatus })
   status: TaskStatus;
 
-  @Prop({ type: Object, default: [] })
-  messages: any[];
+  @Prop({ type: [Object], default: [] })
+  messages: Message[];
 
-  @Prop({ type: Date })
+  @Prop({ required: true })
   createdAt: Date;
 
-  @Prop({ type: Date })
+  @Prop({ required: true })
   updatedAt: Date;
 }
 

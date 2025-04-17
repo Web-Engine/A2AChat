@@ -23,6 +23,7 @@ export class ScheduleService {
   async create(createScheduleDto: CreateScheduleDto): Promise<Schedule> {
     const schedule: Schedule = {
       id: uuidv4(),
+      enabled: true,
       ...createScheduleDto,
     };
     return this.repository.create(schedule);

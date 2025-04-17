@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body, Param, Put, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { RemoteAgentService } from '../services/remote-agent.service';
-import { Task, TaskStatus, Message } from '../../tasks/entities/task.entity';
+import { Task, TaskStatus, Message } from '../../task/entities/task.entity';
 
 @ApiTags('Remote Agent')
 @Controller('remote-agents')

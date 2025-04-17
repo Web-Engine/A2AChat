@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AgentsModule } from './modules/agent/agents.module';
+import { AgentModule } from './modules/agent/agent.module';
 import { RemoteAgentModule } from './modules/remote-agent/remote-agent.module';
-import { SchedulesModule } from './modules/schedule/schedules.module';
-import { TasksModule } from './modules/task/tasks.module';
+import { ScheduleModule } from './modules/schedule/schedule.module';
+import { TaskModule } from './modules/task/task.module';
 import { ChatModule } from './modules/chat/chat.module';
-import { McpsModule } from './modules/mcps/mcps.module';
+import { McpModule } from './modules/mcp/mcp.module';
 import configuration from './config/configuration';
 
 @Module({
@@ -28,12 +28,12 @@ import configuration from './config/configuration';
       },
       inject: [ConfigService],
     }),
-    AgentsModule,
+    AgentModule,
     RemoteAgentModule,
-    SchedulesModule,
-    TasksModule,
+    ScheduleModule,
+    TaskModule,
     ChatModule,
-    McpsModule,
+    McpModule,
   ],
 })
 export class AppModule {}
