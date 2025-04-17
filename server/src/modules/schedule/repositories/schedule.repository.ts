@@ -1,23 +1,15 @@
 import { Injectable } from '@nestjs/common';
-import { InjectConnection } from '@nestjs/mongoose';
-import { Model, Connection, Schema } from 'mongoose';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { Schedule } from '../entities/schedule.entity';
-
-const ScheduleSchema = new Schema<Schedule>({
-  id: { type: String, required: true, unique: true },
-  agentId: { type: String, required: true },
-  cronExpression: { type: String, required: true },
-  description: { type: String },
-  enabled: { type: Boolean, required: true, default: true },
-});
+import { ScheduleSchemaClass } from './schemas/schedule.schema';
 
 @Injectable()
-export class SchedulesRepository {
-  private readonly model: Model<Schedule>;
-
-  constructor(@InjectConnection() connection: Connection) {
-    this.model = connection.model<Schedule>('Schedule', ScheduleSchema);
-  }
+export class ScheduleRepository {
+  constructor(
+    @InjectModel(ScheduleSchemaClass.name)
+    private readonly model: Model<Schedule>,
+  ) {}
 
   async findAll(): Promise<Schedule[]> {
     return this.model.find().lean();

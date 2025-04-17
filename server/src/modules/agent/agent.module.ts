@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AgentsController } from './controllers/agents.controller';
-import { AgentsService } from './services/agents.service';
-import { AgentsRepository } from './repositories/agents.repository';
+import { AgentController } from './controllers/agent.controller';
+import { AgentService } from './services/agent.service';
+import { AgentRepository } from './repositories/agent.repository';
 import { AgentSchemaClass, AgentSchema } from './repositories/schemas/agent.schema';
 import { RemoteAgentModule } from '../remote-agent/remote-agent.module';
 
@@ -11,8 +11,8 @@ import { RemoteAgentModule } from '../remote-agent/remote-agent.module';
     MongooseModule.forFeature([{ name: AgentSchemaClass.name, schema: AgentSchema }]),
     RemoteAgentModule,
   ],
-  controllers: [AgentsController],
-  providers: [AgentsService, AgentsRepository],
-  exports: [AgentsService],
+  controllers: [AgentController],
+  providers: [AgentService, AgentRepository],
+  exports: [AgentService],
 })
-export class AgentsModule {} 
+export class AgentModule {} 

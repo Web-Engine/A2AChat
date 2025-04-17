@@ -1,19 +1,19 @@
 import { Controller, Get, Post, Body, Param, Put, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { AgentsService } from '../services/agents.service';
+import { AgentService } from '../services/agent.service';
 import { Agent } from '../entities/agent.entity';
 import { CreateAgentDto } from '../dtos/create-agent.dto';
 
 @ApiTags('Agent')
 @Controller('agents')
-export class AgentsController {
-  constructor(private readonly agentsService: AgentsService) {}
+export class AgentController {
+  constructor(private readonly agentService: AgentService) {}
 
   @Get()
   @ApiOperation({ summary: '모든 Agent 조회' })
   @ApiResponse({ status: 200, description: '성공', type: [Agent] })
   async findAll(): Promise<Agent[]> {
-    return this.agentsService.findAll();
+    return this.agentService.findAll();
   }
 
   @Get(':id')
@@ -21,14 +21,14 @@ export class AgentsController {
   @ApiResponse({ status: 200, description: '성공', type: Agent })
   @ApiResponse({ status: 404, description: 'Agent가 존재하지 않음' })
   async findOne(@Param('id') id: string): Promise<Agent | null> {
-    return this.agentsService.findOne(id);
+    return this.agentService.findOne(id);
   }
 
   @Post()
   @ApiOperation({ summary: '새로운 Agent 생성' })
   @ApiResponse({ status: 201, description: '생성 성공', type: Agent })
   async create(@Body() createAgentDto: CreateAgentDto): Promise<Agent> {
-    return this.agentsService.create(createAgentDto);
+    return this.agentService.create(createAgentDto);
   }
 
   @Put(':id')
@@ -36,7 +36,7 @@ export class AgentsController {
   @ApiResponse({ status: 200, description: '업데이트 성공', type: Agent })
   @ApiResponse({ status: 404, description: 'Agent가 존재하지 않음' })
   async update(@Param('id') id: string, @Body() updateAgentDto: Partial<CreateAgentDto>): Promise<Agent | null> {
-    return this.agentsService.update(id, updateAgentDto);
+    return this.agentService.update(id, updateAgentDto);
   }
 
   @Delete(':id')
@@ -45,6 +45,6 @@ export class AgentsController {
   @ApiResponse({ status: 204, description: '삭제 성공' })
   @ApiResponse({ status: 404, description: 'Agent가 존재하지 않음' })
   async remove(@Param('id') id: string): Promise<void> {
-    await this.agentsService.remove(id);
+    await this.agentService.remove(id);
   }
 } 

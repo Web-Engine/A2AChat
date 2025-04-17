@@ -2,13 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { Agent, AgentType } from '../entities/agent.entity';
 import { CreateAgentDto } from '../dtos/create-agent.dto';
 import { v4 as uuidv4 } from 'uuid';
-import { AgentsRepository } from '../repositories/agents.repository';
+import { AgentRepository } from '../repositories/agent.repository';
 import { RemoteAgentService } from '../../remote-agent/services/remote-agent.service';
 
 @Injectable()
-export class AgentsService {
+export class AgentService {
   constructor(
-    private readonly repository: AgentsRepository,
+    private readonly repository: AgentRepository,
     private readonly remoteAgentService: RemoteAgentService,
   ) {}
 

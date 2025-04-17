@@ -2,13 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { Schedule } from '../entities/schedule.entity';
 import { CreateScheduleDto } from '../dtos/create-schedule.dto';
 import { v4 as uuidv4 } from 'uuid';
-import { SchedulesRepository } from '../repositories/schedules.repository';
+import { ScheduleRepository } from '../repositories/schedule.repository';
 
 @Injectable()
-export class SchedulesService {
-  constructor(
-    private readonly repository: SchedulesRepository,
-  ) {}
+export class ScheduleService {
+  constructor(private readonly repository: ScheduleRepository) {}
 
   async findAll(): Promise<Schedule[]> {
     return this.repository.findAll();
@@ -18,10 +16,13 @@ export class SchedulesService {
     return this.repository.findById(id);
   }
 
+  async findByAgentId(agentId: string): Promise<Schedule[]> {
+    return this.repository.findByAgentId(agentId);
+  }
+
   async create(createScheduleDto: CreateScheduleDto): Promise<Schedule> {
     const schedule: Schedule = {
       id: uuidv4(),
-      enabled: createScheduleDto.enabled ?? true,
       ...createScheduleDto,
     };
     return this.repository.create(schedule);
@@ -33,9 +34,5 @@ export class SchedulesService {
 
   async remove(id: string): Promise<boolean> {
     return this.repository.remove(id);
-  }
-
-  async findByAgentId(agentId: string): Promise<Schedule[]> {
-    return this.repository.findByAgentId(agentId);
   }
 } 
