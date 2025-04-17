@@ -5,7 +5,6 @@ import { AgentModule } from './modules/agent/agent.module';
 import { RemoteAgentModule } from './modules/remote-agent/remote-agent.module';
 import { ScheduleModule } from './modules/schedule/schedule.module';
 import { TaskModule } from './modules/task/task.module';
-import { ChatModule } from './modules/chat/chat.module';
 import { McpModule } from './modules/mcp/mcp.module';
 import configuration from './config/configuration';
 
@@ -32,7 +31,6 @@ import configuration from './config/configuration';
     RemoteAgentModule,
     ScheduleModule,
     TaskModule,
-    ChatModule,
     McpModule,
   ],
 })
