@@ -15,7 +15,7 @@ const McpSchema = new Schema<Mcp>({
 });
 
 @Injectable()
-export class McpsRepository {
+export class McpRepository {
   private readonly model: Model<Mcp>;
 
   constructor(@InjectConnection() connection: Connection) {

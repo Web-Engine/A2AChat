@@ -2,12 +2,12 @@ import { Injectable, Inject } from '@nestjs/common';
 import { Mcp } from '../entities/mcp.entity';
 import { CreateMcpDto } from '../dtos/create-mcp.dto';
 import { v4 as uuidv4 } from 'uuid';
-import { McpsRepository } from './mcps.repository';
+import { McpRepository } from './mcp.repository';
 
 @Injectable()
-export class McpsService {
+export class McpService {
   constructor(
-    private readonly repository: McpsRepository,
+    private readonly repository: McpRepository,
   ) {}
 
   async findAll(): Promise<Mcp[]> {
