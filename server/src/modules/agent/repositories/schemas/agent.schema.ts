@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
-import { AgentType } from '../../entities/agent.entity';
+import { AgentType } from '../../entities/agent-type.enum';
+import { LocalAgentConfigSchema } from './local-agent-config.schema';
+import { RemoteAgentConfigSchema } from './remote-agent-config.schema';
 
 export type AgentDocument = AgentSchemaClass & Document;
 
@@ -17,6 +19,12 @@ export class AgentSchemaClass {
 
   @Prop()
   description?: string;
+
+  @Prop({ type: LocalAgentConfigSchema })
+  localConfig?: LocalAgentConfigSchema;
+
+  @Prop({ type: RemoteAgentConfigSchema })
+  remoteConfig?: RemoteAgentConfigSchema;
 }
 
 export const AgentSchema = SchemaFactory.createForClass(AgentSchemaClass); 

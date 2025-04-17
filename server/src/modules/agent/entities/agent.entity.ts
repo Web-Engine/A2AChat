@@ -1,9 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-
-export enum AgentType {
-  LOCAL = 'Local',
-  REMOTE = 'Remote',
-}
+import { AgentType } from './agent-type.enum';
+import { LocalAgentConfig } from './local-agent-config.entity';
+import { RemoteAgentConfig } from './remote-agent-config.entity';
 
 export class Agent {
   @ApiProperty({
@@ -28,4 +26,28 @@ export class Agent {
     required: false,
   })
   description?: string;
+
+  @ApiProperty({
+    description: 'Local Agent 설정',
+    type: LocalAgentConfig,
+    required: false,
+  })
+  localConfig?: LocalAgentConfig;
+
+  @ApiProperty({
+    description: 'Remote Agent 설정',
+    type: RemoteAgentConfig,
+    required: false,
+  })
+  remoteConfig?: RemoteAgentConfig;
+
+  @ApiProperty({
+    description: '생성 시간',
+  })
+  createdAt: Date;
+
+  @ApiProperty({
+    description: '마지막 업데이트 시간',
+  })
+  updatedAt: Date;
 } 

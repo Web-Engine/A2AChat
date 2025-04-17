@@ -1,6 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsOptional, IsNotEmpty, IsEnum } from 'class-validator';
-import { AgentType } from '../entities/agent.entity';
+import { IsString, IsOptional, IsNotEmpty, IsEnum, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+import { AgentType } from '../entities/agent-type.enum';
+import { LocalAgentConfigDto } from './local-agent-config.dto';
+import { RemoteAgentConfigDto } from './remote-agent-config.dto';
 
 export class CreateAgentDto {
   @ApiProperty({
@@ -27,18 +30,20 @@ export class CreateAgentDto {
   description?: string;
 
   @ApiProperty({
-    description: 'Remote Agent 엔드포인트',
+    description: 'Local Agent 설정',
     required: false,
   })
-  @IsString()
+  @ValidateNested()
+  @Type(() => LocalAgentConfigDto)
   @IsOptional()
-  endpoint?: string;
+  localConfig?: LocalAgentConfigDto;
 
   @ApiProperty({
-    description: 'Remote Agent API 키',
+    description: 'Remote Agent 설정',
     required: false,
   })
-  @IsString()
+  @ValidateNested()
+  @Type(() => RemoteAgentConfigDto)
   @IsOptional()
-  apiKey?: string;
+  remoteConfig?: RemoteAgentConfigDto;
 } 
