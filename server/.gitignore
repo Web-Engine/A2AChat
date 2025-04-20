@@ -1,0 +1,39 @@
+# Python 가상환경
+.venv/
+venv/
+ENV/
+
+# Python 캐시 파일
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 배포 파일
+dist/
+build/
+*.egg-info/
+
+# IDE 설정
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# 로그 파일
+*.log
+
+# 환경 변수 파일
+.env
+.env.local
+
+# 테스트 관련
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# 기타
+.DS_Store
+Thumbs.db 

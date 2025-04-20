@@ -18,6 +18,10 @@ build/
 *.swp
 *.swo
 
+/A2A
+/adk-python
+/adk-samples
+
 # OS
 .DS_Store
 Thumbs.db 
